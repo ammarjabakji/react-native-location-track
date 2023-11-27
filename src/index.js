@@ -3,7 +3,7 @@ import {AppState, Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import BackgroundTimer from 'react-native-background-timer';
 
-const LocationTracker = ({onLocationUpdate}) => {
+const LocationTrack = ({onLocationUpdate}) => {
   const appStateRef = useRef(AppState.currentState);
 
   const getCurrentLocation = async () => {
@@ -82,4 +82,4 @@ const LocationTracker = ({onLocationUpdate}) => {
   return null;
 };
 
-export {LocationTracker};
+export {LocationTrack};
