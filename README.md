@@ -17,7 +17,7 @@ yarn add react-native-location-track
 import LocationTracher
 
 ```js
-import {LocationTracker} from 'react-native-location-track';
+import LocationTracker from 'react-native-location-track';
 
 // ...
 ```
@@ -27,7 +27,7 @@ See the full example to log track coordinates in both forground and background
 ```js
 import React, {useState, useRef} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import {LocationTrack} from 'react-native-location-track';
+import LocationTracker from 'react-native-location-track';
 
 const App = () => {
   const [locationList, setLocationList] = useState([]);
@@ -49,7 +49,7 @@ const App = () => {
           <Text key={index}>{entry}</Text>
         ))}
       </ScrollView>
-      <LocationTrack onLocationUpdate={handleLocationUpdate} />
+      <LocationTracker onLocationUpdate={handleLocationUpdate} />
     </View>
   );
 };
