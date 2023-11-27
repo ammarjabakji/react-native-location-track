@@ -11,8 +11,16 @@
     "ios",
     "android"
   ],
+  "repository": "https://github.com/ammarjabakji/react-native-location-track",
   "author": "Ammar Jabakji <ammarjabakji@gmail.com> (https://github.com/ammarjabakji)",
-  "license": "ISC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ammarjabakji/react-native-location-track/issues"
+  },
+  "homepage": "https://github.com/ammarjabakji/react-native-location-track#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
       "react": "18.2.0",
       "react-native": "0.72.6",
