@@ -1,6 +1,6 @@
 # react-native-location-tracker
 
-A simple approach to log and track location using React Native.
+A simple React Native library for efficiently logging and tracking user locations in both foreground and background.
 
 ## Installation
 
@@ -12,7 +12,36 @@ npm install react-native-location-track
 yarn add react-native-location-track
 ```
 
+**On Android**
+
+> One thing to note, for android this library assumes that location permission is already granted by the user, so you have to use PermissionsAndroid to request for permission before making the location request.
+
+**On IOS you have to add thisto info.plist**
+
+```
+
+<key>NSLocationWhenInUseUsageDescription</key>
+
+<string>This app requires access to your location when in use to provide personalized recommendations.</string>
+
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+
+<string>This app requires access to your location to track your activities.</string>
+
+<key>NSLocationAlwaysUsageDescription</key>
+
+<string>This app requires access to your location when in use Always.</string>
+
+```
+
 ## Usage
+
+Before running your app on iOS, make sure you have CocoaPods installed and run:
+
+```
+cd ios
+pod install
+```
 
 import LocationTracher
 
@@ -22,7 +51,7 @@ import LocationTracker from 'react-native-location-track';
 // ...
 ```
 
-See the full example to log track coordinates in both forground and background
+Example: Logging and Tracking Coordinates
 
 ```js
 import React, {useState, useRef} from 'react';
