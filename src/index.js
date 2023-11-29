@@ -77,7 +77,7 @@ const LocationTracker = ({onLocationUpdate}) => {
       subscription.remove();
       BackgroundTimer.stopBackgroundTimer();
     };
-  }, []);
+  });
 
   return null;
 };
