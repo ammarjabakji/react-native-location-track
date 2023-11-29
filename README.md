@@ -6,10 +6,28 @@ A simple React Native library for efficiently logging and tracking user location
 
 ```sh
 npm install react-native-location-track
+
 ```
 
+or
+
 ```sh
+
 yarn add react-native-location-track
+```
+
+Required dependencies
+
+```sh
+npm install react-native-background-timer react-native-geolocation-service
+
+yarn add yarn add
+```
+
+or
+
+```sh
+yarn add yarn add
 ```
 
 **On Android**
