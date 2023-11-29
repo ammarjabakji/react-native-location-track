@@ -21,13 +21,13 @@ Required dependencies
 ```sh
 npm install react-native-background-timer react-native-geolocation-service
 
-yarn add yarn add
+
 ```
 
 or
 
 ```sh
-yarn add yarn add
+yarn add yarn add react-native-background-timer react-native-geolocation-service
 ```
 
 **On Android**
