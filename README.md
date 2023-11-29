@@ -21,7 +21,6 @@ Required dependencies
 ```sh
 npm install react-native-background-timer react-native-geolocation-service
 
-
 ```
 
 or
@@ -34,7 +33,7 @@ yarn add yarn add react-native-background-timer react-native-geolocation-service
 
 > One thing to note, for android this library assumes that location permission is already granted by the user, so you have to use PermissionsAndroid to request for permission before making the location request.
 
-**On IOS you have to add thisto info.plist**
+**On iOS, you have to add the following to the Info.plist**
 
 ```
 
