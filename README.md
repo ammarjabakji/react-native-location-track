@@ -26,12 +26,19 @@ npm install react-native-background-timer react-native-geolocation-service
 or
 
 ```sh
-yarn add yarn add react-native-background-timer react-native-geolocation-service
+ yarn add react-native-background-timer react-native-geolocation-service
 ```
 
 **On Android**
 
 > One thing to note, for android this library assumes that location permission is already granted by the user, so you have to use PermissionsAndroid to request for permission before making the location request.
+
+add the following to the src/main/AndroidManifest.xml
+
+```
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+```
 
 **On iOS, you have to add the following to the Info.plist**
 
@@ -69,26 +76,21 @@ import LocationTracker from 'react-native-location-track';
 Example: Logging and Tracking Coordinates
 
 ```js
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import LocationTracker from 'react-native-location-track';
 
 const App = () => {
   const [locationList, setLocationList] = useState([]);
-  const scrollRef = useRef(null);
 
   const handleLocationUpdate = ({latitude, longitude, appState}) => {
-    // Add the new location entry to the list
     const newLocationEntry = `${latitude}, ${longitude} (${appState})`;
     setLocationList(prevList => [...prevList, newLocationEntry]);
-
-    // Scroll to the bottom of the ScrollView when a new entry is added
-    scrollRef.current.scrollToEnd({animated: true});
   };
 
   return (
     <View style={styles.container}>
-      <ScrollView ref={scrollRef} style={styles.scrollView}>
+      <ScrollView style={styles.scrollView}>
         {locationList.map((entry, index) => (
           <Text key={index}>{entry}</Text>
         ))}
@@ -113,6 +115,13 @@ const styles = StyleSheet.create({
 
 export default App;
 ```
+
+if you face any of these issues on Android
+TypeError: Cannot read property 'start' of null or null is not an object (evaluating 'RNBackgroundTimer.start')
+
+try to stop hermes from inside gradle.properties
+
+hermesEnabled=false
 
 ## Contributing
 
