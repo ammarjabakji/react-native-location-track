@@ -69,21 +69,26 @@ import LocationTracker from 'react-native-location-track';
 Example: Logging and Tracking Coordinates
 
 ```js
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import LocationTracker from 'react-native-location-track';
 
 const App = () => {
   const [locationList, setLocationList] = useState([]);
+  const scrollRef = useRef(null);
 
   const handleLocationUpdate = ({latitude, longitude, appState}) => {
+    // Add the new location entry to the list
     const newLocationEntry = `${latitude}, ${longitude} (${appState})`;
     setLocationList(prevList => [...prevList, newLocationEntry]);
+
+    // Scroll to the bottom of the ScrollView when a new entry is added
+    scrollRef.current.scrollToEnd({animated: true});
   };
 
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView ref={scrollRef} style={styles.scrollView}>
         {locationList.map((entry, index) => (
           <Text key={index}>{entry}</Text>
         ))}
