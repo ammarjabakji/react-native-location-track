@@ -67,7 +67,7 @@ cd ios
 pod install
 ```
 
-import LocationTracher
+import LocationTracker
 
 ```js
 import LocationTracker from 'react-native-location-track';
