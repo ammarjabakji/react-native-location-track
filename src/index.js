@@ -60,11 +60,12 @@ const LocationTracker = ({onLocationUpdate}) => {
     appStateRef.current = nextAppState;
     console.log('AppState', appStateRef.current);
 
-    onLocationUpdate({
-      latitude: null,
-      longitude: null,
-      appState: nextAppState,
-    });
+    // onLocationUpdate({
+    //   latitude: null,
+    //   longitude: null,
+    //   appState: nextAppState,
+    // });
+    getCurrentLocation();
   };
 
   useEffect(() => {
