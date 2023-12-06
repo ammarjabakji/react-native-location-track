@@ -85,7 +85,12 @@ const App = () => {
 
   const handleLocationUpdate = ({latitude, longitude, appState}) => {
     const newLocationEntry = `${latitude}, ${longitude} (${appState})`;
+    console.log('newLocationEntry', newLocationEntry);
     setLocationList(prevList => [...prevList, newLocationEntry]);
+  };
+
+  const locationTrackerConfig = {
+    interval: 5000, // milliseconds
   };
 
   return (
@@ -95,7 +100,10 @@ const App = () => {
           <Text key={index}>{entry}</Text>
         ))}
       </ScrollView>
-      <LocationTracker onLocationUpdate={handleLocationUpdate} />
+      <LocationTracker
+        onLocationChanged={handleLocationUpdate}
+        config={locationTrackerConfig}
+      />
     </View>
   );
 };
@@ -115,13 +123,6 @@ const styles = StyleSheet.create({
 
 export default App;
 ```
-
-if you face any of these issues on Android
-TypeError: Cannot read property 'start' of null or null is not an object (evaluating 'RNBackgroundTimer.start')
-
-try to stop hermes from inside gradle.properties
-
-hermesEnabled=false
 
 ## Contributing
 

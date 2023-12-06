@@ -3,17 +3,21 @@ import {AppState, Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import BackgroundTimer from 'react-native-background-timer';
 
-const LocationTracker = ({onLocationUpdate}) => {
+const LocationTracker = ({onLocationChanged, config}) => {
   const appStateRef = useRef(AppState.currentState);
+  const timerRef = useRef(null);
 
   const getCurrentLocation = async () => {
-    BackgroundTimer.runBackgroundTimer(() => {
+    if (timerRef.current) {
+      BackgroundTimer.clearInterval(timerRef.current);
+    }
+
+    timerRef.current = BackgroundTimer.setInterval(() => {
       Geolocation.getCurrentPosition(
         position => {
           const {latitude, longitude} = position.coords;
-          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
           // Pass coordinates and app state back to the component
-          onLocationUpdate({
+          onLocationChanged({
             latitude,
             longitude,
             appState: appStateRef.current,
@@ -23,7 +27,7 @@ const LocationTracker = ({onLocationUpdate}) => {
           console.log('Error getting location:', error);
         },
       );
-    }, 10000);
+    }, config.interval);
   };
 
   const requestLocationPermissionIOS = async () => {
@@ -32,7 +36,7 @@ const LocationTracker = ({onLocationUpdate}) => {
     );
     if (iOSPermissionStatus === 'granted') {
       console.log('Location permission granted on iOS.');
-      getCurrentLocation();
+      // getCurrentLocation();
     } else {
       console.log('Location permission denied on iOS.');
     }
@@ -50,7 +54,7 @@ const LocationTracker = ({onLocationUpdate}) => {
     );
     if (androidPermissionStatus === PermissionsAndroid.RESULTS.GRANTED) {
       console.log('Location permission granted on Android.');
-      getCurrentLocation();
+      // getCurrentLocation();
     } else {
       console.log('Location permission denied on Android.');
     }
@@ -58,14 +62,6 @@ const LocationTracker = ({onLocationUpdate}) => {
 
   const handleAppStateChange = nextAppState => {
     appStateRef.current = nextAppState;
-    console.log('AppState', appStateRef.current);
-
-    // onLocationUpdate({
-    //   latitude: null,
-    //   longitude: null,
-    //   appState: nextAppState,
-    // });
-    getCurrentLocation();
   };
 
   useEffect(() => {
@@ -80,9 +76,13 @@ const LocationTracker = ({onLocationUpdate}) => {
       requestLocationPermissionAndroid();
     }
 
+    getCurrentLocation();
+
     return () => {
       subscription.remove();
-      BackgroundTimer.stopBackgroundTimer();
+      if (timerRef.current) {
+        BackgroundTimer.clearInterval(timerRef.current);
+      }
     };
   }, []);
 
